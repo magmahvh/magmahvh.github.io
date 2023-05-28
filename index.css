@@ -1,0 +1,169 @@
+* {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+
+    font-family: 'Arial';
+    letter-spacing: 0.05em;
+
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    user-select: none;
+
+    transition: 0.3s;
+}   
+
+body {
+    background-image: url("./img/wallpapers.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
+}
+
+.loading_menu.close {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading_menu .avatar {
+    margin-left: calc(50% - 50px);
+    margin-top: calc(50vh - 120px);
+}
+
+.loading_menu .avatar img {
+    object-fit: cover;
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+}
+.loading_menu .username {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: white;
+}
+
+.loading_menu button {
+    outline: 0;
+    border: 0;
+    border-radius: 20px;
+
+    background-color: rgba(160, 160, 160, 0.63);
+    border: solid 1px rgb(247, 247, 247);
+
+    width: 100px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: calc(50% - 50px);
+}
+
+.loading_menu button:hover {
+    cursor: pointer;
+    background-color: rgba(247, 247, 247, 0.63);
+}
+
+.global.close {
+    display: none;
+    opacity: 0;
+}
+
+.global .folders {
+    display: block;
+    margin: 20px;
+    width: 55px;
+}
+
+.global .folders .folder {
+    cursor: default;
+}
+.global .folders .folder:hover {
+    cursor: pointer;
+}
+
+.global .folders .folder img {
+    margin-left: 1px;
+    margin-top: 1px;
+    width: 50px;
+    height: 50px;
+} 
+
+.global .folders .folder p {
+    text-align: center;
+}
+
+.global .folders .folder.clicked img {
+    outline: solid 1px gray;
+}
+
+.global .folders .folder.clicked p {
+    background-color: #52a3ff;
+    border-radius: 5px;
+}
+
+.folder_content {
+    overflow-y: auto;
+    transition: 0s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    size: 1;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.466);
+    backdrop-filter: blur(20px);
+}
+.folder_content.close {
+    pointer-events: none;
+    opacity: 0;
+    size: 0;
+}
+
+.folder_content.opacity {
+    pointer-events: none; 
+    opacity: 0.1;
+}
+
+.folder_content img.cross {
+    width: 30px;
+    height: 30px;
+}
+
+.folder_content img.cross:hover {
+    filter: invert(100%);
+    cursor: pointer;
+}
+
+.folder_content p {
+    margin-left: 35px;
+    margin-top: -27px;
+    margin-bottom: 5px;
+}
+
+.folder_content .content {
+    border-top: solid 1px gray;
+    padding: 20px;
+    white-space:pre-line;
+}
+
+.folder_content .content .folder {
+    border-top: solid 1px gray;
+    border-bottom: solid 1px gray;
+}
+
+.folder_content .content .folder img {
+    width: 20px;
+    height: 20px;
+}
+
+.folder_content .content .folder p {
+    margin-top: -20px;
+}
+
+.folder_content .content .folder:hover {
+    cursor: pointer;
+    background-color: gray;
+}

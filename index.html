@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <title>Magma Portfolios</title>
+</head>
+<body>
+    <div id="loading_menu" class="loading_menu">
+        <div class="avatar">
+            <img src="./img/avatar.png"/>
+        </div>
+        <div class="username">
+            <p>magma</p>
+        </div>
+        <button onclick="closeLogin()">Войти</button>
+    </div>
+    <div id="global" class="global close">
+        <div class="folders">
+            <div id="folder-info" class="folder">
+                <img src="./img/folder.png"/>
+                <p>Info</p>
+            </div> 
+            <div id="folder-work" class="folder">
+                <img src="./img/folder.png"/>
+                <p>Work</p>
+            </div> 
+            <div id="folder-pcode" class="folder">
+                <img src="./img/folder.png"/>
+                <p>PCode</p>
+            </div> 
+        </div>
+        <div id="folder-opened" class="folder_content close">
+            <img onclick="closeFolder()" class="cross" src="./img/cross.png"/>
+            <p id="folder-name">PubCode</p>
+            <div id="folder-content" class="content">
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function closeLogin() {
+            document.getElementById('loading_menu').classList.add('close');
+            document.getElementById('global').classList.remove('close');
+        }
+
+        function closeFolder() {
+            document.getElementById('folder-opened').classList.add('close');
+        }
+
+        var div = document.getElementById('folder-opened');
+        var listener = function(e) {
+            div.style.left = e.pageX - 300 + "px";
+            div.style.top = e.pageY - 20 + "px";
+        };
+
+        document.getElementById('folder-name').addEventListener('mousedown', e => {
+            document.addEventListener('mousemove', listener);
+        });
+
+        document.getElementById('folder-name').addEventListener('mouseup', e => {
+            document.removeEventListener('mousemove', listener);
+        });
+
+        var folder_id = [];
+        var folder = [];
+        var global_folder = 3;
+
+        function folderFunc(id, idHTML, folderName, content) {
+            var folder_iterator = id;
+            folder_id[folder_iterator] = idHTML;
+            folder[folder_iterator] = false;
+            document.getElementById(folder_id[folder_iterator]).onclick = function() {
+                if (folder[folder_iterator]) {
+                    document.getElementById('folder-opened').classList.remove('close')
+                    document.getElementById('folder-name').innerHTML = folderName;
+                    document.getElementById('folder-content').innerHTML = content;
+                } else {
+                    for (i = 0; i < global_folder; i++) {
+                        folder[i] = false;
+                        document.getElementById(folder_id[i]).classList.remove('clicked');
+                    }
+                }
+
+                folder[folder_iterator] = !folder[folder_iterator];
+                if (folder[folder_iterator]) {
+                    if (!document.getElementById('folder-opened').classList.contains('close'))
+                        document.getElementById('folder-opened').classList.add('opacity');
+                    document.getElementById(folder_id[folder_iterator]).classList.add('clicked');
+                } else {
+                    document.getElementById('folder-opened').classList.remove('opacity');
+                    document.getElementById(folder_id[folder_iterator]).classList.remove('clicked');
+                }
+            }
+        }
+
+        function folderOpen(idHTML, folderName, content) {
+            if (document.getElementById(idHTML))
+                document.getElementById(idHTML).onclick = function() {
+                    document.getElementById('folder-name').innerHTML = folderName;
+                    document.getElementById('folder-content').innerHTML = content;
+                }
+        }
+
+        folderFunc(0, 'folder-info', 'Information', 
+                'Welcome to my Website.'+
+                '\nIm 14 years old.'+
+                '\nMy name Vladimir.'+
+                '\nI live in Krasnoyarsk.'+
+                '\n\nSocials:'+
+                '\nMy youtube: <a target="_blank" href="https://youtube.com/@magmabtw">magmabtw</a>'+
+                '\nMy yougame: <a target="_blank" href="https://yougame.biz/members/403434/">Weave Company</a>'+
+                '\nMy work:'+
+                '<div id="folder-info-work" class="folder">'+
+                '    <img src="./img/folder.png"/>'+
+                '    <p>About my work</p>'+ 
+                '</div>'+
+                '\nMy portfolio:'+
+                '<div id="folder-info-pcode" class="folder">'+
+                '    <img src="./img/folder.png"/>'+
+                '    <p>PCode</p>'+ 
+                '</div>'
+                );
+
+        let work_title = 'Where do I work?';
+        let work_content = 'I currently work for <a href="https://melonity.gg/">Melonity</a>.'+
+        '\nI also stand on the status of a moderator in <a href="https://weave.su/">Weave</a>.'+
+        '\nI also have my own Weave script - <a href="https://github.com/idealyaw/">IdealYaw</a>.'+
+        '\n\nI also have about 5 projects on my account, though not entirely successful.';
+        folderFunc(1, 'folder-work', work_title, work_content);
+
+
+        let pcode_title = 'PubCode - Web code editor';
+        let pcode_content = '<img src="./img/projects/pcode.png" style="width: 30%; height: 30%;"/>'+
+        '\nMore screens: <a target="_blank" href="https://imgur.com/a/XSZJiwL">imgur</a>'+
+        '\nPubCode - online web code editor'+
+        '\nDeveloped for codings on HarmonyOS 2.0 and Arndoid 12+ (mobile devices)';
+        folderFunc(2, 'folder-pcode', pcode_title, pcode_content);
+
+        function update() {
+            folderOpen('folder-info-work', work_title, work_content);
+            folderOpen('folder-info-pcode', pcode_title, pcode_content);
+            setTimeout(update, 1000);
+        }
+        update();
+    </script>
+</body>
+</html>
